@@ -6,7 +6,7 @@
 /*   By: jvillefr <jvillefr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 16:02:54 by jvillefr          #+#    #+#             */
-/*   Updated: 2024/04/02 09:14:24 by jvillefr         ###   ########.fr       */
+/*   Updated: 2024/04/02 13:23:52 by jvillefr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,11 @@ class Weapon
     
     public:
     Weapon();
+    Weapon(const std::string& type);
     ~Weapon();
 
     const std::string& getType(void);
-    void setType(std::string& type);
+    void setType( const std::string& type);
 };
 
 #endif
