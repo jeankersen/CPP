@@ -7,12 +7,13 @@ class HumanA
 {
     private:
     std::string _name;
-    Weapon _weapon;
+    Weapon &_weapon; // objet non null, synthaxe simple, code clair
 
     public:
-    HumanA(const std::string& name, const Weapon& weapon);
-    ~HumanA();
+    HumanA(std::string name, Weapon& weapon);
+    ~HumanA(void);
     void attack();
+    void setWeapon(Weapon weapon);
 };
 
 #endif

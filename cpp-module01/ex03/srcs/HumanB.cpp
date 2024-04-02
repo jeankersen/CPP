@@ -1,37 +1,27 @@
 #include "HumanB.hpp"
 
-HumanB::HumanB(const std::string& name)
+HumanB::HumanB(std::string name)
 {
     this->_name = name;
-    this->_weaponPtr = nullptr;
+    this->_weapon = nullptr;
+    std::cout  << COLOR_GREEN << "Human A: " << this->_name  <<  " created" << COLOR_BACK << std::endl;
+
 }
 
 HumanB::~HumanB()
 {
-    delete this->_weaponPtr;
+    delete _weapon;
+    std::cout  << COLOR_RED  << "Human B: " << this->_name << " destroy " << std::endl;
 }
-
 
 void HumanB::attack()
 {
-    if (this->_weaponPtr)
-    {
-        std::cout << this->_name << " attacks with their " << this->_weaponPtr->getType() << std::endl;
-    } 
-    else 
-    {
-        std::cout << this->_name << " attacks with bare hands" << std::endl;
-    }
+    std::cout << this->_name << " attacks with their " << this->_weapon->getType() << std::endl;
+
 }
 
-void HumanB::setWeapon(const Weapon& weapon)
-{
-    delete this->_weaponPtr; // Libérer la mémoire de l'ancien objet Weapon, s'il existe
-    this->_weaponPtr = new Weapon(weapon); // Allouer un nouvel objet Weapon et le copier
+void HumanB::setWeapon(Weapon& weapon) {
+    delete _weapon; // Libérer la mémoire de l'ancienne arme, s'il y en a une
+    _weapon = new Weapon(weapon); // Allouer une nouvelle arme et copier le contenu de weapon
 }
 
-void HumanB::disarm()
-{
-    delete this->_weaponPtr;
-    this->_weaponPtr = nullptr;
-}

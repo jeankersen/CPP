@@ -7,14 +7,13 @@ class HumanB
 {
     private:
     std::string _name;
-    Weapon* _weaponPtr; // pointeur vers une arme pouvant etre nul
+    Weapon* _weapon; // pointeur vers une arme pouvant etre nul// gestion memoire // reassignation
 
     public:
-    HumanB(const std::string& name);
-    ~HumanB();
-    void disarm();
-    void setWeapon(const Weapon& weapon);
-    void attack();
+    HumanB(std::string name);
+    ~HumanB(void);
+    void setWeapon( Weapon &weapon);
+    void attack(void);
 };
 
 #endif
