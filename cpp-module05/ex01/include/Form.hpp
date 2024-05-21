@@ -6,7 +6,7 @@
 /*   By: jvillefr <jvillefr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 14:43:17 by jvillefr          #+#    #+#             */
-/*   Updated: 2024/05/17 16:15:14 by jvillefr         ###   ########.fr       */
+/*   Updated: 2024/05/21 15:31:27 by jvillefr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ class Form
 {
     private:
         std::string _name;
-        bool    _sign;
-        int const _gradeToSign;
-        int const _gradeToExecute;
+        bool    _isSigned;
+        int  _gradeToSign;
+        int  _gradeToExecute;
         
     public:
         class GradeTooHighException : public std::exception 
@@ -36,26 +36,26 @@ class Form
         class GradeTooLowException :  public std::exception 
         {
             public:
-                const char *what() const throw(Form const & form);
+                const char *what() const throw();
         };
 
 
         Form();
-        Form(std::string name, bool sign, int const getGradeToSign, int const getGradeToExecute);
+        Form(std::string name, int gradeToSign, int gradeToExecute);
         Form & operator=(Form const & src);
         Form(Form const & cpy);
         ~Form();
     
         std::string getName() const;
-        bool getSign() const;
-        int const getGradeToSign() const;
-        int const getGradeToExecute() const;
+        std::string getSign() const;
+        int  getGradeToSign() const;
+        int  getGradeToExecute() const;
         
         
         void beSigned(Bureaucrat const & bureau);
-        
+
 };
 
-std::ostream& operator<<(std::ostream & o, Form const & obj);
+std::ostream& operator<<(std::ostream & out, Form const & obj);
 
 #endif
