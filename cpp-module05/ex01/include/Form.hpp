@@ -6,7 +6,7 @@
 /*   By: jvillefr <jvillefr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 14:43:17 by jvillefr          #+#    #+#             */
-/*   Updated: 2024/05/21 15:31:27 by jvillefr         ###   ########.fr       */
+/*   Updated: 2024/06/03 13:30:00 by jvillefr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 #include<stdexcept>
 #include "Bureaucrat.hpp"
 
+
+class Bureaucrat;
 class Form
 {
     private:
@@ -30,15 +32,15 @@ class Form
         class GradeTooHighException : public std::exception 
         {
             public:
-                const char *what() const throw();
+                virtual const char *what() const throw();
         };
         
         class GradeTooLowException :  public std::exception 
         {
             public:
-                const char *what() const throw();
+                virtual const char *what() const throw();
         };
-
+        
 
         Form();
         Form(std::string name, int gradeToSign, int gradeToExecute);
@@ -50,7 +52,7 @@ class Form
         std::string getSign() const;
         int  getGradeToSign() const;
         int  getGradeToExecute() const;
-        
+        void setSign();
         
         void beSigned(Bureaucrat const & bureau);
 

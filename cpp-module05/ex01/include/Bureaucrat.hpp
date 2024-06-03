@@ -6,11 +6,11 @@
 /*   By: jvillefr <jvillefr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 14:42:08 by jvillefr          #+#    #+#             */
-/*   Updated: 2024/05/17 16:10:02 by jvillefr         ###   ########.fr       */
+/*   Updated: 2024/06/03 14:50:54 by jvillefr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
+#ifndef BUREAUCRAT_HPP
 #define BUREAUCRAT_HPP
 
 #define LOWGRADE 150
@@ -21,6 +21,7 @@
 #include<stdexcept>
 #include "Form.hpp"
 
+class Form;
 
 
 class Bureaucrat
@@ -39,25 +40,27 @@ class Bureaucrat
         class GradeTooHighException : public std::exception 
         {
             public:
-                const char *what() const throw();
+                virtual const char *what() const throw();
         };
         
         class GradeTooLowException :  public std::exception 
         {
             public:
-                const char *what() const throw();
+                virtual const char *what() const throw();
         };
 
         std::string getName() const;
         int getGrade() const;
         
-        void addGrade() const;
-        void takeGrade() const;
+        void addGrade();
+        void takeGrade();
 
-        void signForm(Form const & form);
+        void signForm(Form & form);
 };
 
 
 std::ostream& operator<<(std::ostream & o, Bureaucrat const & obj);
+
+
 
 #endif

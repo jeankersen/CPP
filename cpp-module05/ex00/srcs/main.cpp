@@ -6,7 +6,7 @@
 /*   By: jvillefr <jvillefr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 14:57:16 by jvillefr          #+#    #+#             */
-/*   Updated: 2024/05/17 14:01:43 by jvillefr         ###   ########.fr       */
+/*   Updated: 2024/06/03 10:30:21 by jvillefr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,17 @@
 
 int main() {
     try {
+        Bureaucrat random;
         Bureaucrat bob("Bob", 2);
+        Bureaucrat papa(bob);
         std::cout << bob << std::endl;
+        std::cout << random << std::endl;
+        std::cout << papa << std::endl;
+        
         bob.addGrade();
+        random.addGrade();
         std::cout << bob << std::endl;
+        std::cout << random << std::endl;
 
         Bureaucrat alice("Alice", 150);
         std::cout << alice << std::endl;

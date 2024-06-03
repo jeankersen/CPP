@@ -1,4 +1,4 @@
-NAME		=	poly
+NAME		=	form
 
 HEADER		=	./include/
 
@@ -9,7 +9,7 @@ CFLAGS		=	-Werror -Wall -Wextra -g -I $(HEADER)  -std=c++98 -Wno-unused-paramete
 SRC_DIR		=	srcs/
 OBJ_DIR		=	obj/
 
-SRCS		=	$(addprefix $(SRC_DIR), main.cpp Bureaucrat.cpp)
+SRCS		=	$(addprefix $(SRC_DIR), main.cpp Bureaucrat.cpp Form.cpp)
 OBJS		=	$(addprefix $(OBJ_DIR), $(notdir $(SRCS:.cpp=.o)))
 
 all			:	$(OBJ_DIR) $(NAME)

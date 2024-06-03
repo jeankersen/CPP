@@ -6,19 +6,36 @@
 /*   By: jvillefr <jvillefr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 15:37:34 by jvillefr          #+#    #+#             */
-/*   Updated: 2024/05/21 15:25:30 by jvillefr         ###   ########.fr       */
+/*   Updated: 2024/06/03 14:36:01 by jvillefr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Form.hpp"
 
+
+const std::string COLOR_YELLOW = "\033[38;5;226m";   // Yellow
+const std::string COLOR_MAGENTA = "\033[38;5;201m";  // Magenta
+const std::string COLOR_CYAN = "\033[38;5;51m";      // Cyan
+const std::string COLOR_WHITE = "\033[38;5;15m";     // White
+const std::string COLOR_ORANGE = "\033[38;5;208m";   // Orange
+const std::string COLOR_PURPLE = "\033[38;5;93m";    // Purple
+const std::string COLOR_PINK = "\033[38;5;198m";     // Pink
+const std::string COLOR_SKYBLUE = "\033[38;5;75m";   // Sky Blue
+const std::string COLOR_LIME = "\033[38;5;154m";     // Lime
+const std::string COLOR_GRAY = "\033[38;5;242m";     // Gray
+const std::string COLOR_BACK = "\033[0m";            // Black
+const std::string COLOR_GREEN = "\033[38;5;70m";     // Green
+const std::string COLOR_RED = "\033[38;5;196m";      // Red
+
+
+
 Form::Form()
 {
+    std::cout << COLOR_GREEN <<  "Default  form constructor called " << COLOR_BACK << std::endl;
     this->_name = "Default Form";
     this->_isSigned = false;
-    this->_gradeToExecute = 150;
-    this->_getGradeToExecute = 150;
-    std::cout << "Default form construtor created" << std::endl;
+    this->_gradeToSign = LOWGRADE;
+    this->_gradeToExecute = LOWGRADE;
 }
 
 Form::Form(std::string name, int gradeToSign, int gradeToExecute): _name(name), _isSigned(false)
@@ -27,13 +44,11 @@ Form::Form(std::string name, int gradeToSign, int gradeToExecute): _name(name), 
         throw GradeTooHighException();
     else if(gradeToSign > LOWGRADE || gradeToExecute > LOWGRADE)
         throw GradeTooLowException();
-    else if(gradeToSign > gradeToExecute)
-        throw GradeTooHighException();
     else
         {
-            this->_gradeToExecute = gradeToSign;
+            this->_gradeToSign = gradeToSign;
             this->_gradeToExecute = gradeToExecute;
-            std::cout << "Constructor Form witht args " << getName() << "."<< std::endl;
+            std::cout << COLOR_GREEN <<  getName()  << "Constructor Form witht args " << "." << COLOR_BACK <<  std::endl;
         }
         
 }
@@ -42,7 +57,7 @@ Form & Form::operator=(Form const & src)
     if( this != & src)
     {
         _name = src.getName();
-        _isSigned = src.getSign();
+        _isSigned = src._isSigned;
         _gradeToSign = src.getGradeToSign();
         _gradeToExecute = src.getGradeToExecute();
     }
@@ -51,13 +66,13 @@ Form & Form::operator=(Form const & src)
 
 Form::Form(Form const & cpy)
 {
+    std::cout << COLOR_GREEN << "Form with copy" <<  COLOR_BACK << std::endl;
     *this = cpy;
-    std::cout << "Form with copy" << std::endl;
 }
 
 Form::~Form()
 {
-    std::cout << getName() << " :form deleted!" << std::endl;
+    std::cout << COLOR_RED << getName() << " :form deleted!" << COLOR_BACK << std::endl;
 }
 
 std::string Form::getName() const
@@ -66,12 +81,12 @@ std::string Form::getName() const
 }
 
 
-std::string  Form::getSign() const
+std::string Form::getSign() const
 {
-   if(_isSigned)
-        return "True";
+    if(this->_isSigned)
+        return ("True");
     else
-        return "False";
+        return ("False");
 }
 
 int Form::getGradeToSign() const
@@ -84,25 +99,34 @@ int Form::getGradeToExecute() const
     return (this->_gradeToExecute);
 }
 
-void Form::beSigned(Bureaucrat const & bureaucrat)
+void Form::setSign()
 {
-    if(this->_isSigned == true)
-        std::cout << "Already signed!" << std::endl;
-    else if(this->_gradeToSign < bureaucrat.getGrade())
-    {
-        std::cout << bureaucrat.getName() << " couldn’t signed " << getName() << " because " << std::endl;
-        throw Bureaucrat::GradeTooLowhException();
-        
-    }
-    else
-    {
-        this->_isSigned = true;
-         std::cout << bureaucrat.getName() << " signed " << getName() << std::endl;
-    }
-
-        
+    this->_isSigned = true;
 }
 
+void Form::beSigned(Bureaucrat const & bureaucrat)
+{
+    if(this->_isSigned == false)
+    {
+        if (bureaucrat.getGrade() <= this->getGradeToSign())
+                this->_isSigned = true;
+            //std::cout << bureaucrat.getName() << " signed " << getName() << std::endl;
+        else
+            //std::cout << bureaucrat.getName() << " couldn’t signed " << getName() << " because " << std::endl;
+            throw GradeTooLowException();
+    }   
+}
+
+
+const char * Form::GradeTooHighException::what() const throw()
+{
+    return "Grade is to high";
+}
+
+const char * Form::GradeTooLowException::what() const throw()
+{
+    return "Grade is to low";
+}
 
 
 std::ostream & operator<<(std::ostream & out, Form const & obj)

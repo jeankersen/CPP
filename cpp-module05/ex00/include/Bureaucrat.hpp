@@ -6,7 +6,7 @@
 /*   By: jvillefr <jvillefr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 14:57:21 by jvillefr          #+#    #+#             */
-/*   Updated: 2024/05/17 13:52:50 by jvillefr         ###   ########.fr       */
+/*   Updated: 2024/06/03 13:23:07 by jvillefr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 #include<iostream>
 #include<string>
 #include<stdexcept>
-
+#include <string>
 
 
 
@@ -39,13 +39,13 @@ class Bureaucrat
         class GradeTooHighException : public std::exception 
         {
             public:
-                const char *what() const throw();
+                virtual const char *what() const throw();
         };
         
         class GradeTooLowException :  public std::exception 
         {
             public:
-                const char *what() const throw();
+                virtual const char *what() const throw();
         };
 
         std::string getName() const;
