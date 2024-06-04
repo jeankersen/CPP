@@ -6,7 +6,7 @@
 /*   By: jvillefr <jvillefr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 14:42:28 by jvillefr          #+#    #+#             */
-/*   Updated: 2024/06/03 14:55:11 by jvillefr         ###   ########.fr       */
+/*   Updated: 2024/06/04 09:09:37 by jvillefr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -189,11 +189,12 @@ void test7()
 
 int main(void) 
 {
-    //test1();
-   // test2();
-   // test3();
-   // test4();
-    //test5();
-   // test6();
-   test7();
+    
+    //test1(); // default and arguments construtor form
+   // test2(); // error  range form
+    //test3(); // random cant sign big form (via form)
+   //  test4(); // random cant sign big form (via form)
+    //test5(); // bigform can be signed by bob (via form)
+   // test6(); // big form can be signed by bob(via bureaucrat class)
+   //test7(); // random cant sign form (via bureaucrat class)
 }
