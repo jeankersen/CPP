@@ -6,7 +6,7 @@
 /*   By: jvillefr <jvillefr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 16:16:29 by jvillefr          #+#    #+#             */
-/*   Updated: 2024/06/04 16:38:15 by jvillefr         ###   ########.fr       */
+/*   Updated: 2024/06/07 14:02:23 by jvillefr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,6 @@
 class AForm;
 class Intern
 {
-    private:
-        AForm *forms[3];
 
     public:
         Intern();

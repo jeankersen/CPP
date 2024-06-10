@@ -6,7 +6,7 @@
 /*   By: jvillefr <jvillefr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 14:57:30 by jvillefr          #+#    #+#             */
-/*   Updated: 2024/06/06 15:45:23 by jvillefr         ###   ########.fr       */
+/*   Updated: 2024/06/10 09:47:05 by jvillefr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,15 +22,13 @@ Bureaucrat::Bureaucrat(): _name("random"), _grade(LOWGRADE)
       std::cout << COLOR_GREEN <<  "Bureaucrat Default constructor called " << COLOR_BACK << std::endl;
 }
 
-Bureaucrat::Bureaucrat(std::string name, int grade)
+Bureaucrat::Bureaucrat(std::string name, int grade): _name(name), _grade(grade)
 {
     std::cout << COLOR_GREEN <<  "Bureaucrat Constructor called with args " << COLOR_BACK << std::endl;
     if(grade < HIGHGRADE)
         throw Bureaucrat::GradeTooHighException();
     if(grade > LOWGRADE)
         throw Bureaucrat::GradeTooLowException();
-    this->_name = name;
-    this->_grade = grade;
 }
 
 
@@ -38,14 +36,7 @@ Bureaucrat & Bureaucrat::operator=(Bureaucrat const & src)
 {
     std::cout << COLOR_GREEN << "Bureaucrat Copy operator called"  << COLOR_BACK <<  std::endl;
     if(this != & src)
-    {
-        if(src.getGrade() < HIGHGRADE)
-            throw Bureaucrat::GradeTooHighException();
-        if(src.getGrade() > LOWGRADE)
-            throw Bureaucrat::GradeTooLowException();
-        this->_name = src.getName();
         this->_grade = src.getGrade();
-    }
     return (*this);
 }
 
@@ -65,7 +56,7 @@ int Bureaucrat::getGrade() const
     return (this->_grade);
 }
 
-std::string Bureaucrat::getName() const
+const std::string &Bureaucrat::getName() const
 {
     return (this->_name);
 }

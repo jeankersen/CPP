@@ -5,10 +5,11 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jvillefr <jvillefr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/17 14:42:08 by jvillefr          #+#    #+#             */
-/*   Updated: 2024/06/04 14:39:27 by jvillefr         ###   ########.fr       */
+/*   Created: 2024/06/07 09:25:04 by jvillefr          #+#    #+#             */
+/*   Updated: 2024/06/10 11:00:01 by jvillefr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #ifndef BUREAUCRAT_HPP
 #define BUREAUCRAT_HPP
@@ -27,7 +28,7 @@ class AForm;
 class Bureaucrat
 {
     private:
-        std::string _name;
+        const std::string _name;
         int        _grade;
 
     public:
@@ -49,7 +50,7 @@ class Bureaucrat
                 virtual const char *what() const throw();
         };
 
-        std::string getName() const;
+        const std::string getName() const;
         int getGrade() const;
         
         void addGrade();

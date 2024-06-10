@@ -6,154 +6,124 @@
 /*   By: jvillefr <jvillefr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 14:42:28 by jvillefr          #+#    #+#             */
-/*   Updated: 2024/06/04 16:05:30 by jvillefr         ###   ########.fr       */
+/*   Updated: 2024/06/10 14:00:54 by jvillefr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ShrubberyCreationForm.hpp"
 #include "RobotomyRequestForm.hpp"
 #include "PresidentialPardonForm.hpp"
+#include "Intern.hpp"
+const std::string COLOR_ORANGE = "\033[38;5;208m";   // Orange
+const std::string COLOR_BACK = "\033[0m";            // Black
 
 void test1()
 {
     try 
-    {
-        PresidentialPardonForm PForm1;
-
-        ShrubberyCreationForm RForm1;
-        ShrubberyCreationForm RForm2("RForm2");
-
-        RobotomyRequestForm BForm1;
-        RobotomyRequestForm BForm2("BForm2");
+	{
+        Intern intern;
+        AForm *ShrubberyCreationForm  = intern.makeForm("ShrubberyCreationForm", "garden");
+        Bureaucrat bob("Bob", 137);
+        Bureaucrat jhon("Jhon", 145);
         
+        bob.signForm(*ShrubberyCreationForm);
+        jhon.executeForm(*ShrubberyCreationForm);
 
-        
-        RForm1 = RForm2;
-        PForm1.action();
-        BForm1 = BForm2;
-        BForm1.action();
+        jhon.executeForm(*ShrubberyCreationForm);
 
-        
+        delete ShrubberyCreationForm ;
     }
-    catch (std::exception &e) 
-    {
-        std::cout << e.what() << std::endl;
+    
+	catch (std::exception & e) 
+	{
+        std::cout << "Exception: " << e.what() << std::endl;
     }
 }
-
-
-
-
 
 void test2()
 {
     try 
-    {
-        PresidentialPardonForm PForm("PForm");
+	{
+        Intern intern;
+        AForm *RobotomyRequestForm = intern.makeForm("RobotomyRequestForm", "garden");
+        Bureaucrat bob("bob", 44);
+        Bureaucrat jhon("jhon", 72);
+        bob.executeForm(*RobotomyRequestForm);
+        jhon.signForm(*RobotomyRequestForm);
 
-       
-       // ShrubberyCreationForm RForm2("SForm");
+        jhon.executeForm(*RobotomyRequestForm);
 
-     
-       // RobotomyRequestForm BForm2("BForm");
-       
-        
-        Bureaucrat bob("bob", 5);
-        PForm.beSigned(bob);
-        PForm.execute(bob);
-
+        delete RobotomyRequestForm;
     }
-    catch (std::exception &e) 
-    {
-        std::cout << e.what() << std::endl;
+
+    catch (std::exception & e) 
+	{
+        std::cout << "Exception: " << e.what() << std::endl;
     }
 }
-
-
-
 
 void test3()
 {
-    try 
-    {
-        PresidentialPardonForm PForm("PForm");
 
-       
-       // ShrubberyCreationForm RForm2("SForm");
-
-     
-       // RobotomyRequestForm BForm2("BForm");
-       
-        Bureaucrat random;
+    try
+	{
+        Intern intern;
+        AForm *PresidentialPardonForm = intern.makeForm("PresidentialPardonForm", "garden");
         Bureaucrat bob("bob", 5);
-        PForm.beSigned(bob);
-        PForm.execute(random);
-
+        Bureaucrat jhon("jhon", 24);
+        jhon.signForm(*PresidentialPardonForm);
+        bob.executeForm(*PresidentialPardonForm);
+        jhon.executeForm(*PresidentialPardonForm);
+        
+        delete PresidentialPardonForm;
     }
-    catch (std::exception &e) 
-    {
-        std::cout << e.what() << std::endl;
+
+    catch (std::exception & e) 
+	{
+        std::cout << "Exception: " << e.what() << std::endl;
     }
 }
-
-
 
 void test4()
 {
+    Intern intern;
+
     try 
-    {
-        PresidentialPardonForm PForm("PForm");
-
-       
-       // ShrubberyCreationForm RForm2("SForm");
-
-     
-       // RobotomyRequestForm BForm2("BForm");
-       
-        
+	{
+        AForm *PresidentialPardonForm = intern.makeForm("Whatever AForm", "MIAOU");
         Bureaucrat bob("bob", 5);
-        PForm.beSigned(bob);
-        bob.executeForm(PForm);
+        Bureaucrat jhon("jhon", 24);
+        jhon.signForm(*PresidentialPardonForm);
+        bob.executeForm(*PresidentialPardonForm);
+
+        jhon.executeForm(*PresidentialPardonForm);
+
+        delete PresidentialPardonForm;       
 
     }
-    catch (std::exception &e) 
-    {
-        std::cout << e.what() << std::endl;
+
+    catch (std::exception & e) 
+	{
+        std::cout << "Exception: " << e.what() << std::endl;
     }
 }
-
-
-
-void test5()
-{
-    try 
-    {
-       // PresidentialPardonForm PForm("PForm");
-       RobotomyRequestForm BForm("BForm");
-       
-        
-        Bureaucrat bob("bob", 5);
-        BForm.beSigned(bob);
-       // BForm.action();
-        bob.executeForm(BForm);
-
-    }
-    catch (std::exception &e) 
-    {
-        std::cout << e.what() << std::endl;
-    }
-}
-
-
 
 int main(void) 
 {
+
+    std::cout << COLOR_ORANGE <<  " TEST 1-Intern construtor, try to sign and execute ShrubberyCreationForm" << COLOR_BACK << std::endl;
+    test1();
+
+    std::cout << std::endl;
+    std::cout << COLOR_ORANGE <<  " TEST 2-Intern construtor, try to sign and execute RobotomyRequestForm" << COLOR_BACK << std::endl;
+    test2();
+
+    std::cout << std::endl;
+    std::cout << COLOR_ORANGE <<  " TEST 3-Intern construtor, try to sign and execute RobotomyRequestForm" << COLOR_BACK << std::endl;
+    test3();
     
-    //test1(); // default and arguments construtor AForm
-   // test2(); // error  range form
-   // test3(); // random cant sign big form (via form)
-   //test4(); // random cant sign big form (via form)
-    test5(); // bigform can be signed by bob (via form)
-   // test6(); // big form can be signed by bob(via bureaucrat class)
-   //test7(); // random cant sign form (via bureaucrat class)
+    std::cout << std::endl;
+    std::cout << COLOR_ORANGE <<  " TEST 4-Intern construtor, try to sign and execute AForm that does not exist" << COLOR_BACK << std::endl;
+    test4();
+
 }

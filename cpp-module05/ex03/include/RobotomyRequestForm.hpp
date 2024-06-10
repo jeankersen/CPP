@@ -6,7 +6,7 @@
 /*   By: jvillefr <jvillefr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 12:01:50 by jvillefr          #+#    #+#             */
-/*   Updated: 2024/06/04 16:48:06 by jvillefr         ###   ########.fr       */
+/*   Updated: 2024/06/10 13:12:26 by jvillefr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,19 +26,13 @@ class Bureaucrat;
 class AForm;
 class RobotomyRequestForm : public AForm
 {
-
-    private:
-        std::string Target;
-        
-    public:
+     public:
         RobotomyRequestForm();
         
-        RobotomyRequestForm(std::string Target);
+        RobotomyRequestForm(std::string target);
         RobotomyRequestForm & operator=(RobotomyRequestForm const & src);
         RobotomyRequestForm(RobotomyRequestForm const & cpy);
         ~RobotomyRequestForm();
-
-        AForm * clone(std::string Target);
 
         void action() const;
     

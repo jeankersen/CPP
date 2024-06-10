@@ -6,7 +6,7 @@
 /*   By: jvillefr <jvillefr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 14:42:08 by jvillefr          #+#    #+#             */
-/*   Updated: 2024/06/06 16:21:21 by jvillefr         ###   ########.fr       */
+/*   Updated: 2024/06/10 09:48:24 by jvillefr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ class Form;
 class Bureaucrat
 {
     private:
-        std::string _name;
+        const std::string _name;
         int        _grade;
 
     public:
@@ -49,7 +49,7 @@ class Bureaucrat
                 virtual const char *what() const throw();
         };
 
-        std::string getName() const;
+        const std::string getName() const;
         int getGrade() const;
         
         void addGrade();

@@ -6,7 +6,7 @@
 /*   By: jvillefr <jvillefr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 15:37:34 by jvillefr          #+#    #+#             */
-/*   Updated: 2024/06/06 16:26:44 by jvillefr         ###   ########.fr       */
+/*   Updated: 2024/06/10 10:08:10 by jvillefr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,42 +19,29 @@ const std::string COLOR_RED = "\033[38;5;196m";      // Red
 
 
 
-Form::Form()
+Form::Form():_name("Default Form"), _gradeToSign(LOWGRADE), _gradeToExecute(LOWGRADE)
 {
     std::cout << COLOR_GREEN <<  "Form Default  form constructor called " << COLOR_BACK << std::endl;
-    this->_name = "Default Form";
     this->_isSigned = false;
-    this->_gradeToSign = LOWGRADE;
-    this->_gradeToExecute = LOWGRADE;
 }
 
-Form::Form(std::string name, int gradeToSign, int gradeToExecute): _name(name), _isSigned(false)
+Form::Form(std::string name, int gradeToSign, int gradeToExecute): _name(name), _isSigned(false),  _gradeToSign(gradeToSign), _gradeToExecute(gradeToExecute)
 {
     if(gradeToSign < HIGHGRADE || gradeToExecute < HIGHGRADE)
         throw GradeTooHighException();
     else if(gradeToSign > LOWGRADE || gradeToExecute > LOWGRADE)
         throw GradeTooLowException();
     else
-        {
-            this->_gradeToSign = gradeToSign;
-            this->_gradeToExecute = gradeToExecute;
-            std::cout << COLOR_GREEN <<  getName()  << "Form Constructor Form witht args " << "." << COLOR_BACK <<  std::endl;
-        }
-        
+        std::cout << COLOR_GREEN <<  getName()  << "Form Constructor Form witht args " << "." << COLOR_BACK <<  std::endl;
 }
 Form & Form::operator=(Form const & src) 
 {
     if( this != & src)
-    {
-        _name = src.getName();
-        _isSigned = src._isSigned;
-        _gradeToSign = src.getGradeToSign();
-        _gradeToExecute = src.getGradeToExecute();
-    }
+       this->_isSigned = src._isSigned;
     return (*this);
 }
 
-Form::Form(Form const & cpy)
+Form::Form(Form const & cpy): _name(cpy._name), _isSigned(cpy._isSigned),  _gradeToSign(cpy.getGradeToSign()), _gradeToExecute(cpy.getGradeToExecute())
 {
     std::cout << COLOR_GREEN << "Form with copy" <<  COLOR_BACK << std::endl;
     *this = cpy;
@@ -65,7 +52,7 @@ Form::~Form()
     std::cout << COLOR_RED << getName() << " :Form deleted!" << COLOR_BACK << std::endl;
 }
 
-std::string Form::getName() const
+const std::string Form::getName() const
 {
     return (this->_name);
 }
@@ -112,8 +99,7 @@ void Form::beSigned(Bureaucrat const & bureaucrat)
             std::cout << bureaucrat.getName() << " couldn’t signed " << getName() << " because " << GradeTooLowException().what() << "." << std::endl;
             throw GradeTooLowException(); 
         }
-    }
-       
+    }   
 }
 
 

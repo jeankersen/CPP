@@ -6,7 +6,7 @@
 /*   By: jvillefr <jvillefr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 14:42:28 by jvillefr          #+#    #+#             */
-/*   Updated: 2024/06/06 16:33:58 by jvillefr         ###   ########.fr       */
+/*   Updated: 2024/06/10 10:54:42 by jvillefr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,13 @@ void test2()
     try 
     {
         Form form1("Big Form", 10, 151);
+    }
+    catch (std::exception &e) 
+    {
+        std::cout << e.what() << std::endl;
+    }
+        try 
+    {
         Form form2("Big Form", 0, 10);
     }
     catch (std::exception &e) 
@@ -31,19 +38,16 @@ void test1()
 {
     try 
     {
-        Form bigForm;
-        std::cout << bigForm<< std::endl;
-        
-        Bureaucrat randomBureaucrat;
-        std::cout << randomBureaucrat << std::endl;
     
         Bureaucrat bob("Bob", 2);
-        std::cout << bob << std::endl;
-        
-        
+        Bureaucrat randomBureaucrat;
         Form form1("Big Form", 10, 10);      
-        bigForm = form1;
-        std::cout << bigForm <<  std::endl;
+        Form bigForm = form1;
+        std::cout << bob << std::endl;
+        std::cout << randomBureaucrat << std::endl;
+        std::cout << form1 << std::endl;
+        std::cout << bigForm << std::endl;
+        
     }
     catch (std::exception &e) 
     {
@@ -56,18 +60,11 @@ void test3()
 {
     try 
     {
-        Form bigForm;
-        std::cout << bigForm<< std::endl;
-        
         Bureaucrat randomBureaucrat;
-        std::cout << randomBureaucrat << std::endl;
-    
-        Bureaucrat bob("Bob", 2);
-        std::cout << bob << std::endl;
-        
-        
         Form form1("Big Form", 10, 10);      
-        bigForm = form1;
+        Form bigForm = form1;
+        
+        std::cout << randomBureaucrat << std::endl;
         std::cout << bigForm <<  std::endl;
 
         bigForm.beSigned(randomBureaucrat);
@@ -83,22 +80,16 @@ void test4()
 {
     try 
     {
-        Form bigForm;
-        std::cout << bigForm<< std::endl;
-        
         Bureaucrat randomBureaucrat;
-        std::cout << randomBureaucrat << std::endl;
-    
         Bureaucrat bob("Bob", 2);
-        std::cout << bob << std::endl;
-        
-        
         Form form1("Big Form", 10, 10);      
-        bigForm = form1;
+        Form bigForm = form1;
+        
+        std::cout << randomBureaucrat << std::endl;
+        std::cout << bob << std::endl;
         std::cout << bigForm <<  std::endl;
         
-        bigForm.beSigned(randomBureaucrat);
-        std::cout << bigForm << std::endl;
+        randomBureaucrat.signForm(form1);
     }
     catch (std::exception &e) 
     {
@@ -111,22 +102,19 @@ void test5()
 {
     try 
     {
-        Form bigForm;
-        std::cout << bigForm<< std::endl;
-        
         Bureaucrat randomBureaucrat;
-        std::cout << randomBureaucrat << std::endl;
-    
         Bureaucrat bob("Bob", 2);
-        std::cout << bob << std::endl;
-        
-        
         Form form1("Big Form", 10, 10);      
-        bigForm = form1;
+        Form bigForm = form1;
+
+        std::cout << randomBureaucrat << std::endl;
+        std::cout << bob << std::endl;
         std::cout << bigForm <<  std::endl;
         
         bigForm.beSigned(bob);
         std::cout << bigForm << std::endl;
+        bigForm.beSigned(randomBureaucrat);
+
     }
     catch (std::exception &e) 
     {
@@ -139,22 +127,19 @@ void test6()
 {
     try 
     {
-        Form bigForm;
-        std::cout << bigForm<< std::endl;
-        
         Bureaucrat randomBureaucrat;
-        std::cout << randomBureaucrat << std::endl;
-    
-        Bureaucrat bob("Bob", 2);
-        std::cout << bob << std::endl;
-        
-        
         Form form1("Big Form", 10, 10);      
-        bigForm = form1;
+        Form bigForm = form1;
+        Bureaucrat bob("Bob", 2);
+
+        
+        std::cout << randomBureaucrat << std::endl;
+        std::cout << bob << std::endl;
         std::cout << bigForm <<  std::endl;
         
         bob.signForm(bigForm);
         std::cout << bigForm << std::endl;
+        randomBureaucrat.signForm(bigForm);
     }
     catch (std::exception &e) 
     {
@@ -166,21 +151,16 @@ void test7()
 {
     try 
     {
-        Form bigForm;
-        std::cout << bigForm<< std::endl;
-        
         Bureaucrat randomBureaucrat;
-        std::cout << randomBureaucrat << std::endl;
-    
         Bureaucrat bob("Bob", 2);
+        Form form1("Big Form", 10, 10);      
+        Form bigForm(form1);
+        
+        std::cout << randomBureaucrat << std::endl;
         std::cout << bob << std::endl;
         
-        
-        Form form1("Big Form", 10, 10);      
-        bigForm = form1;
-        std::cout << bigForm <<  std::endl;
-        
         randomBureaucrat.signForm(bigForm);
+        
         std::cout << bigForm << std::endl;
     }
     catch (std::exception &e) 
@@ -191,24 +171,28 @@ void test7()
 
 int main(void) 
 {
+
     std::cout << COLOR_ORANGE <<  " TEST 1-default and arguments construtor form" << COLOR_BACK << std::endl;
     test1();
     std::cout << std::endl;
     std::cout << COLOR_ORANGE <<  " TEST 2-error  range form" << COLOR_BACK << std::endl;
-    test2(); // error  range form
+    test2(); 
     std::cout << std::endl;
-    std::cout << COLOR_ORANGE <<  " TEST 3-random cant sign big form (via form)" << COLOR_BACK << std::endl;
+    std::cout << COLOR_ORANGE <<  " TEST 3-random cant sign big form (via Form class)" << COLOR_BACK << std::endl;
     test3();
     std::cout << std::endl;
-    std::cout << COLOR_ORANGE <<  " TEST 4-random cant sign big form (via form))" << COLOR_BACK << std::endl;
+    std::cout << COLOR_ORANGE <<  " TEST 4-random cant sign big form (Bureaucrat class))" << COLOR_BACK << std::endl;
     test4();
     std::cout << std::endl;
-    std::cout << COLOR_ORANGE <<  " TEST 5-bigform can be signed by bob (via form)" << COLOR_BACK << std::endl;
-    test5(); // bigform can be signed by bob (via form)
+    std::cout << COLOR_ORANGE <<  " TEST 5- form can be signed by bob (via Form class) // try to sign again" << COLOR_BACK << std::endl;
+    test5(); 
     std::cout << std::endl;
-    std::cout << COLOR_ORANGE <<  " TEST 6-big form can be signed by bob(via bureaucrat class)" << COLOR_BACK << std::endl;
-    test6(); // big form can be signed by bob(via bureaucrat class)
+    std::cout << COLOR_ORANGE <<  " TEST 6- form can be signed by bob(via Bbureaucrat class) // try to sign again" << COLOR_BACK << std::endl;
+    test6();
     std::cout << std::endl;
     std::cout << COLOR_ORANGE <<  " TEST 7-random cant sign form (via bureaucrat class)" << COLOR_BACK << std::endl;
-    test7(); // random cant sign form (via bureaucrat class)
+    test7(); 
+
+
 }
+    

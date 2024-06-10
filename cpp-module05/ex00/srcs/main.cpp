@@ -6,7 +6,7 @@
 /*   By: jvillefr <jvillefr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 14:57:16 by jvillefr          #+#    #+#             */
-/*   Updated: 2024/06/06 15:25:05 by jvillefr         ###   ########.fr       */
+/*   Updated: 2024/06/10 09:47:21 by jvillefr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,8 @@ int main() {
     try {
         Bureaucrat random;
         Bureaucrat bob("Bob", 2);
-        Bureaucrat papa(bob);
         std::cout << bob << std::endl;
         std::cout << random << std::endl;
-        std::cout << papa << std::endl;
         
         std::cout << std::endl;
         std::cout << COLOR_ORANGE <<  " TEST 1" << COLOR_BACK << std::endl;

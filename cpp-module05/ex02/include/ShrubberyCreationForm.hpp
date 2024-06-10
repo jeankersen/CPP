@@ -6,7 +6,7 @@
 /*   By: jvillefr <jvillefr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 09:44:54 by jvillefr          #+#    #+#             */
-/*   Updated: 2024/06/04 10:28:53 by jvillefr         ###   ########.fr       */
+/*   Updated: 2024/06/10 11:58:07 by jvillefr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,10 @@ class Bureaucrat;
 class AForm;
 class ShrubberyCreationForm : public AForm
 {
-
-    private:
-        std::string Target;
-        
     public:
         ShrubberyCreationForm();
         
-        ShrubberyCreationForm(std::string Target);
+        ShrubberyCreationForm(std::string target);
         ShrubberyCreationForm & operator=(ShrubberyCreationForm const & src);
         ShrubberyCreationForm(ShrubberyCreationForm const & cpy);
         ~ShrubberyCreationForm();
@@ -44,7 +40,5 @@ class ShrubberyCreationForm : public AForm
     
 
 };
-
-std::ostream& operator<<(std::ostream & out, ShrubberyCreationForm const & obj);
 
 #endif

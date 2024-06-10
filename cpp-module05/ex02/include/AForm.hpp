@@ -6,7 +6,7 @@
 /*   By: jvillefr <jvillefr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 14:43:17 by jvillefr          #+#    #+#             */
-/*   Updated: 2024/06/04 14:23:19 by jvillefr         ###   ########.fr       */
+/*   Updated: 2024/06/10 11:35:11 by jvillefr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,12 @@ class Bureaucrat;
 class AForm
 {
     private:
-        std::string _name;
+        const std::string _name;
+        std::string _target;
         bool    _isSigned;
-        int  _gradeToSign;
-        int  _gradeToExecute;
+        const int  _gradeToSign;
+        const int  _gradeToExecute;
+    
         
     public:
         class GradeTooHighException : public std::exception 
@@ -43,16 +45,18 @@ class AForm
         
 
         AForm();
-        AForm(std::string name, int gradeToSign, int gradeToExecute);
+        AForm(std::string name, int gradeToSign, int gradeToExecute, std::string target);
         AForm & operator=(AForm const & src);
         AForm(AForm const & cpy);
         ~AForm();
     
-        std::string getName() const;
+        const std::string getName() const;
+        std::string getTarget() const;
         std::string getSign() const;
         int  getGradeToSign() const;
         int  getGradeToExecute() const;
         void setSign();
+        void setTarget(std::string target);
         
         void beSigned(Bureaucrat const & bureau);
 

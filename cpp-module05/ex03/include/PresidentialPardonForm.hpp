@@ -6,7 +6,7 @@
 /*   By: jvillefr <jvillefr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 13:52:36 by jvillefr          #+#    #+#             */
-/*   Updated: 2024/06/04 16:48:01 by jvillefr         ###   ########.fr       */
+/*   Updated: 2024/06/10 13:11:26 by jvillefr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,20 +25,13 @@
 class Bureaucrat;
 class AForm;
 class PresidentialPardonForm : public AForm
-{
-
-    private:
-        std::string Target;
-        
+{        
     public:
         PresidentialPardonForm();
-        
-        PresidentialPardonForm(std::string Target);
+        PresidentialPardonForm(std::string target);
         PresidentialPardonForm & operator=(PresidentialPardonForm const & src);
         PresidentialPardonForm(PresidentialPardonForm const & cpy);
         ~PresidentialPardonForm();
-
-        AForm * clone(std::string Target);
 
         void action() const;
     
