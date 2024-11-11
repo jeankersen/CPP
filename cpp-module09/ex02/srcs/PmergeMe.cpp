@@ -1,6 +1,6 @@
 #include "PmergeMe.hpp"
 
-
+#include <ctime> 
 
 void fillVectorWithArguments(int argc, char* argv[], std::vector<int>& vec) {
     for (int i = 1; i < argc; ++i) {
@@ -11,91 +11,133 @@ void fillVectorWithArguments(int argc, char* argv[], std::vector<int>& vec) {
 
         if (*end != '\0' || value > INT_MAX || value < INT_MIN || value < 0) {
             throw InvalidArgumentException();
-            
         }
         vec.push_back(static_cast<int>(value));
     }
 }
 
-
-/*
-
-void makeFirstPair(std::vector<int>& vec, std::deque<int>& deq)
-{
-    
-    int vecFirst = vec[0];
-    int vecSecond = vec[1];
-    vec.erase(vec.begin(), vec.begin() + 2);
-    if (vecFirst > vecSecond)
-    {
-        deq.push_back(vecSecond);
-        deq.push_back(vecFirst);
-        return ;
+void displayVector(const std::vector<int>& vec) {
+    for (size_t i = 0; i < vec.size(); ++i) {
+        std::cout << vec[i] << " ";
     }
-    deq.push_back(vecFirst);
-    deq.push_back(vecSecond);
+    std::cout << std::endl;
 }
 
 
+void swap(int& a, int& b) {
+    int temp = a;
+    a = b;
+    b = temp;
+}
 
-
-void PmergeMeAlgo(std::vector<int>& vec, std::deque<int>& deq)
-{
-    size_t size = vec.size();
-    if(size % 2 == 0)
-    {
-        size_t nbrOfPair = size / 2;
-        while(nbrOfPair > 0)
-        {
-            makeFirstPair(vec, deq);
-            nbrOfPair--;
-        }
-    }
-    else
-    {
-        int vecFirst = vec[0];
-        vec.erase(vec.begin());
-        deq.push_back(vecFirst);
-        size_t size = vec.size();
-        size_t nbrOfPair = size / 2;
-        while(nbrOfPair > 0)
-        {
-            makeFirstPair(vec, deq);
-            nbrOfPair--;
+void makePairSort(std::vector<int>& vec) {
+    for (size_t i = 0; i + 1 < vec.size(); i += 2) {
+        if (vec[i] > vec[i + 1]) {
+            std::swap(vec[i], vec[i + 1]);
         }
     }
 }
 
-template <typename VecContainer, typename DeqContainer>
-void PmergeMeAlgo(VecContainer& vec, DeqContainer& deq)
-{
-    if(isSorted(vec))
-        return;
-    size_t size = vec.size();
-    if(size % 2 != 0)
-    {
-        typename VecContainer::value_type vecFirst = vec[0];
-        vec.erase(vec.begin());
-        deq.push_back(vecFirst);
+std::vector<int> getSmallValue(const std::vector<int>& vec) {
+    std::vector<int> result;
+    for (size_t i = 0; i < vec.size(); i += 2) {
+        result.push_back(vec[i]);
+    }
+    return result;
+}
+
+void removeSmallValue(std::vector<int>& vec) {
+    for (int i = vec.size() - 1; i >= 0; --i) {
+        if (i % 2 == 0) {
+            vec.erase(vec.begin() + i);
+        }
+    }
+}
+
+
+void insertValue(std::vector<int>& vec, int value) {
+    int left = 0;
+    int right = vec.size();
+    while (left < right) {
+        int mid = left + (right - left) / 2;
+        if (vec[mid] < value) {
+            left = mid + 1;  
+        } else {
+            right = mid;  
+        }
     }
 
+    vec.insert(vec.begin() + left, value);
+}
 
 
-    if (size % 2 == 0) {
-        size_t nbrOfPair = size / 2;
-        while (nbrOfPair > 0) {
-            makeFirstPair(vec, deq);
-            nbrOfPair--;
+void insertElements(std::vector<int>& vec, const std::vector<int>& vecToPush) {
+    for (size_t i = 0; i < vecToPush.size(); ++i)
+    {
+        insertValue(vec, vecToPush[i]);
+
+    }
+}
+
+bool isSorted(const std::vector<int>& vec) {
+    for (size_t i = 1; i < vec.size(); ++i) {
+        if (vec[i] < vec[i - 1]) {
+            return false; 
         }
-    } else {
+    }
+    return true;  
+}
+
+int removeLastAndReturn(std::vector<int>& vec) {
+    if (vec.empty()) {
+        std::cerr << "Le vecteur est vide, aucune valeur à supprimer.\n";
+        return 0;
+    }
+
+    int lastValue = vec.back();
+    vec.pop_back();
+    return lastValue;
+}
+
+int removeFirstAndReturn(std::vector<int>& vec) {
+    if (vec.empty()) {
+        std::cerr << "Le vecteur est vide, aucune valeur à supprimer.\n";
+        return 0;
+    }
+
+    int firstValue = vec.front();
+    vec.erase(vec.begin());
+    return firstValue;
+}
+
+void insertAtBeginning(std::vector<int>& vec, int value) {
+    vec.insert(vec.begin(), value);
+}
+
+
+int handleFirstCase(std::vector<int>& vec, int& lastValue, size_t& size)
+{
+    if(size <= 1 || isSorted(vec)) // vev <= 1 elem
+        return 1;
+
+    if(size == 2) // can rid of that maybe // vec == 2 elem
+    {
+        makePairSort(vec);
+        return 1;
+    }
+
+    if(size % 2 != 0) // vec >= 3 elem
+        lastValue = removeLastAndReturn(vec);
         
-        size = vec.size();  // Update size after removing the first element
-        size_t nbrOfPair = size / 2;
-        while (nbrOfPair > 0) {
-            makeFirstPair(vec, deq);
-            nbrOfPair--;
-        }
+    makePairSort(vec);
+    if(isSorted(vec))//  >= 3 elem
+    {
+        if(lastValue >= 0)
+            insertValue(vec, lastValue);
+        return 1;
     }
+    return 0;
 }
 
-*/
+
+
